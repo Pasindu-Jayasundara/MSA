@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import CertificateStudio from '../features/certificates/CertificateStudio.jsx'
 import EmailSender from '../features/bulk-email/EmailSender.jsx'
+import QRCodeGenerator from '../features/qr-generator/QRCodeGenerator.jsx'
 import './App.css'
 
 const tools = [
   { id: 'certificates', label: 'Certificates', description: 'Create and export certificates for your participants.' },
   { id: 'email', label: 'Bulk email', description: 'Personalize messages and send or export email drafts.' },
+  { id: 'qr', label: 'QR code generator', description: 'Create and download custom QR codes.' },
 ]
 
 export default function App() {
@@ -24,8 +26,8 @@ export default function App() {
         <div className="help-tools-sidebar-credit">Developed by <a href="https://www.kryvazent.com/" target="_blank" rel="noreferrer">Kryvazent</a></div>
       </aside>
       <main className="help-tools-main">
-        <div className="help-tools-heading"><span>MSA WORKSPACE</span><h1>{activeTool === 'certificates' ? 'Certificate studio' : 'Bulk email sender'}</h1><p>{tools.find((tool) => tool.id === activeTool)?.description}</p></div>
-        {activeTool === 'certificates' ? <CertificateStudio /> : <EmailSender />}
+        <div className="help-tools-heading"><span>MSA WORKSPACE</span><h1>{activeTool === 'certificates' ? 'Certificate studio' : activeTool === 'email' ? 'Bulk email sender' : 'QR code generator'}</h1><p>{tools.find((tool) => tool.id === activeTool)?.description}</p></div>
+        {activeTool === 'certificates' ? <CertificateStudio /> : activeTool === 'email' ? <EmailSender /> : <QRCodeGenerator />}
       </main>
     </div>
   </div>
